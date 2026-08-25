@@ -111,50 +111,85 @@
 ## ⏳ PENDIENTE
 
 ### Assets (Fotos)
-- ⏳ Descargar fotos desde Google Drive
-- ⏳ Optimizar fotos (TinyPNG)
-- ⏳ Redimensionar a 1920x1080px
-- ⏳ Renombrar a foto-1.jpg, foto-2.jpg, etc.
-- ⏳ Subir a carpeta `images/`
+- ✅ Descargar fotos desde Google Drive (19 fotos)
+- ✅ Optimizar fotos ( Pillow, calidad 85%)
+- ✅ Redimensionar a 1920x1080px
+- ✅ Renombrar a foto-01.jpg, foto-02.jpg, etc.
+- ✅ Subir a carpeta `images/`
 
 ### Video (Opcional)
 - ✅ URL de YouTube recibida: https://youtu.be/-vDRGIY3okA
 - ✅ VIDEO_ID obtenido: `-vDRGIY3okA`
 - ✅ Reemplazado en `index.html`
-- ⏳ Subir video a YouTube (ya está publicado)
-- ⏳ Verificar que sea público
+- ✅ Video público en YouTube
 
 ### Personalización
-- ⏳ Reemplazar `[UBICACIÓN]`
-- ⏳ Reemplazar `[X]` (estrato)
-- ⏳ Reemplazar `[ÁREA]`
-- ⏳ Reemplazar `[PRECIO]`
-- ⏳ Reemplazar `[TU_NUMERO]` (3 veces)
-- ⏳ Reemplazar `[HABITACIONES]`
-- ⏳ Reemplazar `[BAÑOS]`
-- ⏳ Reemplazar `[PARQUEADEROS]`
-- ⏳ Reemplazar `[ESTRATO]`
-- ⏳ Reemplazar `[AÑO]`
-- ⏳ Reemplazar `[TÍTULO DESCRIPTIVO]`
-- ⏳ Reemplazar `[DESCRIPCIÓN DETALLADA]`
-- ⏳ Reemplazar `[INCLUYE: UBICACIÓN...]`
-- ⏳ Reemplazar `[CARACTERÍSTICAS DESTACADAS]`
-- ⏳ Reemplazar `[DIRECCIÓN COMPLETA]`
-- ⏳ Reemplazar `[TU NOMBRE]`
-- ⏳ Reemplazar `[TU TELÉFONO]`
-- ⏳ Reemplazar `[TU EMAIL]`
-- ⏳ Reemplazar `[DIRECCIÓN/UBICACIÓN]`
-- ⏳ Actualizar features (agregar/eliminar según unidad)
+- ✅ Reemplazar `[UBICACIÓN]` - Toledo Campestre, Bello
+- ✅ Reemplazar `[X]` (estrato) - Estrato 3
+- ✅ Reemplazar `[ÁREA]` - 60,1 m²
+- ✅ Reemplazar `[PRECIO]` - $275.000.000 COP
+- ✅ Reemplazar `[TU_NUMERO]` - 3136847081 (3 veces)
+- ✅ Reemplazar `[HABITACIONES]` - 2 + Estudio
+- ✅ Reemplazar `[BAÑOS]` - 2
+- ✅ Reemplazar `[PARQUEADEROS]` - Privado
+- ✅ Reemplazar `[ESTRATO]` - 3
+- ✅ Reemplazar `[AÑO]` - 2022
+- ✅ Reemplazar `[TÍTULO DESCRIPTIVO]`
+- ✅ Reemplazar `[DESCRIPCIÓN DETALLADA]`
+- ✅ Reemplazar `[INCLUYE: UBICACIÓN...]`
+- ✅ Reemplazar `[CARACTERÍSTICAS DESTACADAS]`
+- ✅ Reemplazar `[DIRECCIÓN COMPLETA]`
+- ✅ Reemplazar `[TU NOMBRE]` - David Link
+- ✅ Reemplazar `[TU TELÉFONO]` - 313 684 7081
+- ✅ Reemplazar `[TU EMAIL]` - edavid.link@gmail.com
+- ✅ Reemplazar `[DIRECCIÓN/UBICACIÓN]`
+- ✅ Actualizar features (12 features según unidad)
 
 ### GitHub
 - ⏳ Crear repositorio en GitHub
-- ⏳ Inicializar Git en la carpeta
-- ⏳ Commit archivos
+- ✅ Inicializar Git en la carpeta
+- ✅ Commit archivos
 - ⏳ Push a GitHub
 - ⏳ Habilitar GitHub Pages
 - ⏳ Verificar deploy
 
 ### Finalización
+- ⏳ Probar en diferentes dispositivos
+- ⏳ Verificar todos los enlaces
+
+---
+
+## 📤 COMANDOS PARA SUBIR A GITHUB
+
+### 1. Crear repositorio en GitHub
+
+Ve a https://github.com/new y crea un repositorio llamado **apartamento-venta** (público, sin README ni .gitignore).
+
+### 2. Subir código desde el VPS
+
+```bash
+cd /home/hermes/apartamento-venta
+git remote add origin https://github.com/[TU_USUARIO_GITHUB]/apartamento-venta.git
+git branch -M main
+git push -u origin main
+```
+
+### 3. Activar GitHub Pages
+
+En GitHub:
+1. Ve a **Settings** → **Pages**
+2. Source: **Deploy from a branch**
+3. Branch: **main**
+4. Folder: **/(root)**
+5. Guardar
+
+### 4. URL final
+
+```
+https://[TU_USUARIO_GITHUB].github.io/apartamento-venta/
+```
+
+### 5. Finalización
 - ⏳ Probar en diferentes dispositivos
 - ⏳ Verificar todos los enlaces
 - ⏳ Agregar Analytics (opcional)
