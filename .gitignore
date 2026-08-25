@@ -1,0 +1,64 @@
+# Archivos a ignorar en Git
+
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor de código
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Archivos de optimización
+css/*.min.css
+js/*.min.js
+
+# Fotos optimizadas (opcional)
+# images/optimized/
+
+# Archivos de backups
+*.bak
+*.backup
+
+# Archivos de configuración local
+.env
+.env.local
+.env.*.local
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build
+dist/
+build/
+out/
+
+# Archivos de GitHub Pages
+.nojekyll
+CNAME
+
+# Archivos de imagen RAW (si trabajas con archivos RAW)
+*.cr2
+*.nef
+*.raw
+*.dng
