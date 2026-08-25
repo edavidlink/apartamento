@@ -53,6 +53,9 @@ dist/
 build/
 out/
 
+# Assets temporales descargados de Google Drive
+assets_temp/
+
 # Archivos de GitHub Pages
 .nojekyll
 CNAME
