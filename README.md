@@ -60,7 +60,7 @@ Landing page moderna y profesional para la venta de tu apartamento. Diseño resp
 ## 📁 Estructura del Proyecto
 
 ```
-apartamento-venta/
+apartamento/
 ├── index.html          # Página principal
 ├── css/
 │   └── style.css       # Estilos principales
@@ -177,7 +177,7 @@ Reemplaza los marcadores en `index.html`:
 
 1. Ve a [GitHub.com](https://github.com)
 2. Click en **New repository**
-3. Nombre: `apartamento-venta`
+3. Nombre: `apartamento`
 4. Marca **Public**
 5. Click en **Create repository**
 
@@ -185,8 +185,8 @@ Reemplaza los marcadores en `index.html`:
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/[USUARIO]/apartamento-venta.git
-cd apartamento-venta
+git clone https://github.com/[USUARIO]/apartamento.git
+cd apartamento
 
 # Copia todos los archivos a la carpeta
 # (index.html, css/, js/, images/)
@@ -216,12 +216,12 @@ git push origin main
 Tu landing page estará disponible en:
 
 ```
-https://[USUARIO].github.io/apartamento-venta/
+https://[USUARIO].github.io/apartamento/
 ```
 
 **Ejemplo:**
 ```
-https://edavidlink.github.io/apartamento-venta/
+https://edavidlink.github.io/apartamento/
 ```
 
 ### Paso 5: (Opcional) Dominio Personalizado

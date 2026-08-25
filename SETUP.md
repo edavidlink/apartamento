@@ -104,7 +104,7 @@ foto-6.jpg      # Vista exterior
 
 ```bash
 # Copia fotos a la carpeta images/
-cp /ruta/a/tus/fotos/*.jpg ~/apartamento-venta/images/
+cp /ruta/a/tus/fotos/*.jpg ~/apartamento/images/
 ```
 
 ---
@@ -227,7 +227,7 @@ Agrega o elimina features según tu unidad:
 3. Configura:
 
    ```
-   Repository name: apartamento-venta
+   Repository name: apartamento
    Description: Landing page venta apartamento
    ☐ Private
    ☑ Public
@@ -244,11 +244,11 @@ Agrega o elimina features según tu unidad:
 
 ### Opción A: Desde el VPS (método actual)
 
-Los archivos ya están creados en `/home/hermes/apartamento-venta`.
+Los archivos ya están creados en `/home/hermes/apartamento`.
 
 ```bash
 # Ve a la carpeta del proyecto
-cd ~/apartamento-venta
+cd ~/apartamento
 
 # Inicializa Git
 git init
@@ -260,7 +260,7 @@ git add .
 git commit -m "Landing page venta apartamento"
 
 # Agrega remoto (reemplaza [USUARIO])
-git remote add origin https://github.com/[USUARIO]/apartamento-venta.git
+git remote add origin https://github.com/[USUARIO]/apartamento.git
 
 # Sube a GitHub
 git push -u origin main
@@ -272,8 +272,8 @@ Si prefieres trabajar desde tu computadora:
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/[USUARIO]/apartamento-venta.git
-cd apartamento-venta
+git clone https://github.com/[USUARIO]/apartamento.git
+cd apartamento
 
 # Copia los archivos del VPS a tu computadora
 # (puedes descargarlos desde GitHub o usar scp)
@@ -317,7 +317,7 @@ git push origin main
 4. En la parte superior, aparecerá un enlace:
 
    ```
-   🌐 https://[USUARIO].github.io/apartamento-venta/
+   🌐 https://[USUARIO].github.io/apartamento/
    ```
 
 5. Click en el enlace para verificar que funcione
@@ -328,7 +328,7 @@ git push origin main
 
 ### Opción A: Usar subdominio gratuito de GitHub
 
-Ya tienes uno: `https://[USUARIO].github.io/apartamento-venta/`
+Ya tienes uno: `https://[USUARIO].github.io/apartamento/`
 
 ### Opción B: Usar dominio personalizado
 
@@ -419,7 +419,7 @@ git push origin main
 Comparte el enlace:
 
 ```
-https://[USUARIO].github.io/apartamento-venta/
+https://[USUARIO].github.io/apartamento/
 ```
 
 ### En portales inmobiliarios
@@ -531,7 +531,7 @@ Si tienes problemas:
 
 **URL final:**
 ```
-https://[USUARIO].github.io/apartamento-venta/
+https://[USUARIO].github.io/apartamento/
 ```
 
 **O con dominio personalizado:**

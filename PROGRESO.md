@@ -7,7 +7,7 @@
 ## ✅ COMPLETADO
 
 ### Estructura del Proyecto
-- ✅ Directorio creado: `/home/hermes/apartamento-venta/`
+- ✅ Directorio creado: `/home/hermes/apartamento/`
 - ✅ Estructura de carpetas creada:
   - ✅ `css/` (estilos)
   - ✅ `js/` (JavaScript)
@@ -163,13 +163,13 @@
 
 ### 1. Crear repositorio en GitHub
 
-Ve a https://github.com/new y crea un repositorio llamado **apartamento-venta** (público, sin README ni .gitignore).
+Ve a https://github.com/new y crea un repositorio llamado **apartamento** (público, sin README ni .gitignore).
 
 ### 2. Subir código desde el VPS
 
 ```bash
-cd /home/hermes/apartamento-venta
-git remote add origin https://github.com/[TU_USUARIO_GITHUB]/apartamento-venta.git
+cd /home/hermes/apartamento
+git remote add origin https://github.com/[TU_USUARIO_GITHUB]/apartamento.git
 git branch -M main
 git push -u origin main
 ```
@@ -186,7 +186,7 @@ En GitHub:
 ### 4. URL final
 
 ```
-https://[TU_USUARIO_GITHUB].github.io/apartamento-venta/
+https://[TU_USUARIO_GITHUB].github.io/apartamento/
 ```
 
 ### 5. Finalización
@@ -243,7 +243,7 @@ https://[TU_USUARIO_GITHUB].github.io/apartamento-venta/
 
 ```bash
 # Ir a la carpeta del proyecto
-cd ~/apartamento-venta
+cd ~/apartamento
 
 # Ver estructura de archivos
 ls -la
@@ -262,8 +262,8 @@ cat js/main.js
 
 ```bash
 # Clonar repositorio (después de crearlo en GitHub)
-git clone https://github.com/[USUARIO]/apartamento-venta.git
-cd apartamento-venta
+git clone https://github.com/[USUARIO]/apartamento.git
+cd apartamento
 
 # Copiar fotos desde Google Drive
 # (instrucciones en SETUP.md)
