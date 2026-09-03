@@ -128,7 +128,7 @@ function updateActiveStates() {
 // AUTOPLAY
 // ========================================
 function startAutoplay() {
-    autoplayTimer = setInterval(nextSlide, 5000);
+    autoplayTimer = setInterval(nextSlide, 90000);
 }
 
 function resetAutoplay() {
