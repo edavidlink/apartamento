@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apartamento de 60,1 m² en venta en Toledo Campestre, Bello. Piso 21 con vista al oriente, sol naciente.">
-    <title>Venta Apartamento | Toledo Campestre - Bello</title>
+    <meta name="description" content="Apartamento de 60,4 m² en venta en Toledo Campestre, Bello. Piso 21 con vista al oriente, sol naciente.">
+    <title>Apartamento Toledo Campestre</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="48x48" href="favicon-48x48.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +22,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Swiper CSS (Carrusel) -->
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     
     <!-- Custom CSS -->
@@ -25,157 +33,37 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <i class="fas fa-home"></i> Venta Apartamento
+                <span class="se-vende">🔥 SE VENDE</span>
             </div>
             <nav class="nav">
-                <a href="#inmueble" class="nav-link">Inmueble</a>
+                <a href="#video" class="nav-link">Ver video</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Section (compacto) -->
+    <section class="hero compact">
         <div class="container">
-            <h1 class="title">Apartamento en Venta</h1>
-            <p class="subtitle">Toledo Campestre, Bello | Estrato 3 | 60,1 m² | Piso 21</p>
-            <div class="price-tag">$275.000.000 COP</div>
-            <a href="https://wa.me/573136847081" class="btn-whatsapp" target="_blank" rel="noopener">
-                <i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp
-            </a>
-        </div>
-    </section>
-
-    <!-- Carrusel de Fotos -->
-    <section class="gallery" id="inmueble">
-        <div class="container">
-            <h2 class="section-title">Galería de Fotos</h2>
-            
-            <!-- Carrusel principal -->
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="images/foto-01.jpg" alt="Sala principal" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-02.jpg" alt="Sala - vista cercana" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-03.jpg" alt="Sala y cocina integrada" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-04.jpg" alt="Cocina" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-05.jpg" alt="Cocina - vista cercana" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-06.jpg" alt="Comedor" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-07.jpg" alt="Comedor y sala" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-08.jpg" alt="Pasillo habitaciones" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-09.jpg" alt="Cuarto auxiliar" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-10.jpg" alt="Baño auxiliar" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-11.jpg" alt="Estudio / posible 3er cuarto" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-12.jpg" alt="Habitación principal y estudio" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-13.jpg" alt="Habitación principal" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-14.jpg" alt="Vestier habitación principal" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-15.jpg" alt="Baño habitación principal" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-16.jpg" alt="Ducha baño principal" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-17.jpg" alt="Balcón" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-18.jpg" alt="Zona de ropas" loading="lazy">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/foto-19.jpg" alt="Calentador de agua a gas" loading="lazy">
-                    </div>
-                </div>
-                
-                <!-- Paginación -->
-                <div class="swiper-pagination"></div>
-                
-                <!-- Navegación con flechas -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            
-            <!-- Miniaturas -->
-            <div class="thumbnails">
-                <img src="images/foto-01.jpg" alt="Sala principal" class="thumbnail active">
-                <img src="images/foto-02.jpg" alt="Sala - vista cercana" class="thumbnail">
-                <img src="images/foto-03.jpg" alt="Sala y cocina" class="thumbnail">
-                <img src="images/foto-04.jpg" alt="Cocina" class="thumbnail">
-                <img src="images/foto-05.jpg" alt="Cocina cercana" class="thumbnail">
-                <img src="images/foto-06.jpg" alt="Comedor" class="thumbnail">
-                <img src="images/foto-07.jpg" alt="Comedor y sala" class="thumbnail">
-                <img src="images/foto-08.jpg" alt="Pasillo" class="thumbnail">
-                <img src="images/foto-09.jpg" alt="Cuarto auxiliar" class="thumbnail">
-                <img src="images/foto-10.jpg" alt="Baño auxiliar" class="thumbnail">
-                <img src="images/foto-11.jpg" alt="Estudio" class="thumbnail">
-                <img src="images/foto-12.jpg" alt="Hab ppal y estudio" class="thumbnail">
-                <img src="images/foto-13.jpg" alt="Habitación ppal" class="thumbnail">
-                <img src="images/foto-14.jpg" alt="Vestier" class="thumbnail">
-                <img src="images/foto-15.jpg" alt="Baño ppal" class="thumbnail">
-                <img src="images/foto-16.jpg" alt="Ducha" class="thumbnail">
-                <img src="images/foto-17.jpg" alt="Balcón" class="thumbnail">
-                <img src="images/foto-18.jpg" alt="Zona ropas" class="thumbnail">
-                <img src="images/foto-19.jpg" alt="Calentador" class="thumbnail">
+            <h1 class="title">Apartamento Toledo Campestre</h1>
+            <div class="hero-actions">
+                <div class="price-tag">$290.000.000</div>
+                <a href="https://wa.me/573136847081" class="btn-whatsapp" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Metadatos del Inmueble -->
-    <section class="metadata">
+    <!-- Metadatos del Inmueble (compacto) -->
+    <section class="metadata compact">
         <div class="container">
             <div class="metadata-grid">
                 <div class="metadata-item">
                     <i class="fas fa-expand-arrows-alt"></i>
                     <div>
                         <span class="label">Área</span>
-                        <span class="value">60,1 m²</span>
-                    </div>
-                </div>
-                <div class="metadata-item">
-                    <i class="fas fa-bed"></i>
-                    <div>
-                        <span class="label">Habitaciones</span>
-                        <span class="value">2 + Estudio</span>
-                    </div>
-                </div>
-                <div class="metadata-item">
-                    <i class="fas fa-bath"></i>
-                    <div>
-                        <span class="label">Baños</span>
-                        <span class="value">2</span>
-                    </div>
-                </div>
-                <div class="metadata-item">
-                    <i class="fas fa-car"></i>
-                    <div>
-                        <span class="label">Parqueadero</span>
-                        <span class="value">Privado</span>
+                        <span class="value">60,4 m²</span>
                     </div>
                 </div>
                 <div class="metadata-item">
@@ -188,34 +76,339 @@
                 <div class="metadata-item">
                     <i class="fas fa-calendar-alt"></i>
                     <div>
-                        <span class="label">Año</span>
-                        <span class="value">2022</span>
+                        <span class="label">Antigüedad</span>
+                        <span class="value">6 años</span>
+                    </div>
+                </div>
+                <div class="metadata-item">
+                    <i class="fas fa-building"></i>
+                    <div>
+                        <span class="label">Piso</span>
+                        <span class="value">21</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Descripción del Inmueble -->
+    <!-- Características del Apartamento (compacto) -->
+    <section class="apartment-features compact" id="inmueble">
+        <div class="container">
+            <h2 class="section-title">Características del Apartamento</h2>
+            <div class="features-grid-apartment">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bed"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">2 Habitaciones</span>
+                        <span class="feature-detail">Principal con vestier, auxiliar con closet</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">1 Estudio Amplio</span>
+                        <span class="feature-detail">Se puede usar como 3er cuarto</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bath"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">2 Baños Cabinados</span>
+                        <span class="feature-detail">Con agua caliente</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Cocina Integral</span>
+                        <span class="feature-detail">Granito San Gabriel, gas, horno y campana</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-couch"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Sala y Comedor</span>
+                        <span class="feature-detail">Espacios amplios e iluminados</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-door-open"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Balcón</span>
+                        <span class="feature-detail">Vista al oriente, sol naciente</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-tshirt"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Zona de Ropas</span>
+                        <span class="feature-detail">Privados y de visitantes</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Calentador a Gas</span>
+                        <span class="feature-detail">Agua caliente permanente</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-th-large"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Piso en Cerámica</span>
+                        <span class="feature-detail">Con zócalo y cielo raso en drywall</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Iluminación LED</span>
+                        <span class="feature-detail">Eficiente y moderna</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-wifi"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Cableado Oculto</span>
+                        <span class="feature-detail">TV e Internet por paredes</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-door-closed"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-name">Puertas en Madera</span>
+                        <span class="feature-detail">En cuartos y baños</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Fotos -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galería de Fotos</h2>
+            
+            <!-- Carrusel principal -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="images/foto-02.jpg" alt="Sala de cerca - Portada" loading="lazy">
+                        <div class="slide-caption">Sala de cerca</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-01.jpg" alt="Sala principal" loading="lazy">
+                        <div class="slide-caption">Sala principal</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-03.jpg" alt="Sala y cocina integrada" loading="lazy">
+                        <div class="slide-caption">Sala y cocina integrada</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-04.jpg" alt="Cocina integral en granito" loading="lazy">
+                        <div class="slide-caption">Cocina integral en granito</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-05.jpg" alt="Cocina - vista cercana" loading="lazy">
+                        <div class="slide-caption">Cocina - vista cercana</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-06.jpg" alt="Comedor" loading="lazy">
+                        <div class="slide-caption">Comedor</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-07.jpg" alt="Comedor y sala" loading="lazy">
+                        <div class="slide-caption">Comedor y sala</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-08.jpg" alt="Pasillo habitaciones" loading="lazy">
+                        <div class="slide-caption">Pasillo habitaciones</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-09.jpg" alt="Cuarto auxiliar con closet" loading="lazy">
+                        <div class="slide-caption">Cuarto auxiliar con closet</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-10.jpg" alt="Baño auxiliar cabinado" loading="lazy">
+                        <div class="slide-caption">Baño auxiliar cabinado</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-11.jpg" alt="Estudio / posible 3er cuarto" loading="lazy">
+                        <div class="slide-caption">Estudio / posible 3er cuarto</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-12.jpg" alt="Habitación principal y estudio" loading="lazy">
+                        <div class="slide-caption">Habitación principal y estudio</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-13.jpg" alt="Habitación principal" loading="lazy">
+                        <div class="slide-caption">Habitación principal</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-14.jpg" alt="Vestier habitación principal" loading="lazy">
+                        <div class="slide-caption">Vestier habitación principal</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-15.jpg" alt="Baño privado cabinado" loading="lazy">
+                        <div class="slide-caption">Baño privado cabinado</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-16.jpg" alt="Ducha baño principal" loading="lazy">
+                        <div class="slide-caption">Ducha baño principal</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-17.jpg" alt="Balcón con vista al oriente" loading="lazy">
+                        <div class="slide-caption">Balcón con vista al oriente</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-18.jpg" alt="Zona de ropas independiente" loading="lazy">
+                        <div class="slide-caption">Zona de ropas independiente</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/foto-19.jpg" alt="Calentador de agua a gas" loading="lazy">
+                        <div class="slide-caption">Calentador de agua a gas</div>
+                    </div>
+                </div>
+                
+                <!-- Paginación -->
+                <div class="swiper-pagination"></div>
+                
+                <!-- Navegación con flechas -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            
+            <!-- Miniaturas con caption -->
+            <div class="thumbnails">
+                <div class="thumbnail-item" data-index="0">
+                    <img src="images/foto-02.jpg" alt="Sala cercana" class="thumbnail active">
+                    <span class="thumb-caption">Sala cercana</span>
+                </div>
+                <div class="thumbnail-item" data-index="1">
+                    <img src="images/foto-01.jpg" alt="Sala" class="thumbnail">
+                    <span class="thumb-caption">Sala</span>
+                </div>
+                <div class="thumbnail-item" data-index="2">
+                    <img src="images/foto-03.jpg" alt="Sala y cocina" class="thumbnail">
+                    <span class="thumb-caption">Sala y cocina</span>
+                </div>
+                <div class="thumbnail-item" data-index="3">
+                    <img src="images/foto-04.jpg" alt="Cocina" class="thumbnail">
+                    <span class="thumb-caption">Cocina</span>
+                </div>
+                <div class="thumbnail-item" data-index="4">
+                    <img src="images/foto-05.jpg" alt="Cocina cercana" class="thumbnail">
+                    <span class="thumb-caption">Cocina cercana</span>
+                </div>
+                <div class="thumbnail-item" data-index="5">
+                    <img src="images/foto-06.jpg" alt="Comedor" class="thumbnail">
+                    <span class="thumb-caption">Comedor</span>
+                </div>
+                <div class="thumbnail-item" data-index="6">
+                    <img src="images/foto-07.jpg" alt="Comedor y sala" class="thumbnail">
+                    <span class="thumb-caption">Comedor y sala</span>
+                </div>
+                <div class="thumbnail-item" data-index="7">
+                    <img src="images/foto-08.jpg" alt="Pasillo" class="thumbnail">
+                    <span class="thumb-caption">Pasillo</span>
+                </div>
+                <div class="thumbnail-item" data-index="8">
+                    <img src="images/foto-09.jpg" alt="Cuarto auxiliar" class="thumbnail">
+                    <span class="thumb-caption">Cuarto aux.</span>
+                </div>
+                <div class="thumbnail-item" data-index="9">
+                    <img src="images/foto-10.jpg" alt="Baño auxiliar" class="thumbnail">
+                    <span class="thumb-caption">Baño aux.</span>
+                </div>
+                <div class="thumbnail-item" data-index="10">
+                    <img src="images/foto-11.jpg" alt="Estudio" class="thumbnail">
+                    <span class="thumb-caption">Estudio</span>
+                </div>
+                <div class="thumbnail-item" data-index="11">
+                    <img src="images/foto-12.jpg" alt="Hab ppal y estudio" class="thumbnail">
+                    <span class="thumb-caption">Hab ppal</span>
+                </div>
+                <div class="thumbnail-item" data-index="12">
+                    <img src="images/foto-13.jpg" alt="Habitación ppal" class="thumbnail">
+                    <span class="thumb-caption">Hab ppal</span>
+                </div>
+                <div class="thumbnail-item" data-index="13">
+                    <img src="images/foto-14.jpg" alt="Vestier" class="thumbnail">
+                    <span class="thumb-caption">Vestier</span>
+                </div>
+                <div class="thumbnail-item" data-index="14">
+                    <img src="images/foto-15.jpg" alt="Baño ppal" class="thumbnail">
+                    <span class="thumb-caption">Baño ppal</span>
+                </div>
+                <div class="thumbnail-item" data-index="15">
+                    <img src="images/foto-16.jpg" alt="Ducha" class="thumbnail">
+                    <span class="thumb-caption">Ducha</span>
+                </div>
+                <div class="thumbnail-item" data-index="16">
+                    <img src="images/foto-17.jpg" alt="Balcón" class="thumbnail">
+                    <span class="thumb-caption">Balcón</span>
+                </div>
+                <div class="thumbnail-item" data-index="17">
+                    <img src="images/foto-18.jpg" alt="Zona ropas" class="thumbnail">
+                    <span class="thumb-caption">Zona ropas</span>
+                </div>
+                <div class="thumbnail-item" data-index="18">
+                    <img src="images/foto-19.jpg" alt="Calentador" class="thumbnail">
+                    <span class="thumb-caption">Calentador</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descripción del Inmueble (con emojis) -->
     <section class="description">
         <div class="container">
             <h2 class="section-title">Descripción del Inmueble</h2>
-            <div class="description-content">
+            
+            <div class="description-intro">
                 <p>
-                    <strong>Apartamento con cuarto útil de 60,1 m² en piso 21, con vista al oriente y sol naciente.</strong>
+                    <strong>🏠 Hermoso apartamento en venta en Bello (sector Madera, zona oriental), con un área privada de 60,4 m² en piso 21, con vista hacia el oriente, sol naciente, en la unidad residencial Toledo Campestre P.H.</strong>
                 </p>
-                <p>
-                    Espacio diseñado para el confort y la funcionalidad. Cuenta con sala, comedor y balcón con excelente iluminación natural. Cocina integral en granito con cubierta a gas, horno a gas, campana y barra en granito con licorera oculta. Zona de ropas independiente de la cocina.
-                </p>
-                <p>
-                    Distribución interior: baño social terminado con cabina y agua caliente, cuarto auxiliar con closet, cuarto principal con vestier y baño privado terminado con cabina y agua caliente, y un amplio estudio con biblioteca que puede usarse como tercer cuarto.
-                </p>
-                <p>
-                    <strong>Acabados de calidad:</strong> piso en cerámica con zócalo, cielo raso en drywall, iluminación LED, calentador de agua a gas, tuberías para cableado interno (TV e Internet), y puertas en madera en cuartos y baños.
-                </p>
-                <p>
-                    <strong>Ubicación:</strong> Unidad cerrada Toledo Campestre en Bello, Antioquia. Cerca de la Autopista Norte, Autopista Medellín-Bogotá y Vía a Machado. A 5 min en carro de la estación Madera del Metro (12 min caminando) y a 12 min de la estación Bello. Zona con droguerías, supermercados, gimnasios, salones de belleza y barberías a pocos minutos. Dos centros comerciales a 12 min en carro. Zona de alta valorización con proyectos inmobiliarios cercanos y la construcción del Central Park (Autódromo de Bello).
-                </p>
+                <p>El apartamento cuenta con acabados premium. En la zona oriental de Bello actualmente está el foco de desarrollo inmobiliario e infraestructura.</p>
+            </div>
+
+            <!-- Particularidades de diseño -->
+            <div class="description-section">
+                <h3>✨ Particularidades de diseño</h3>
+                <ul class="feature-list">
+                    <li>📖 El 3er cuarto fue adecuado como un amplio e iluminado estudio (oficina) que se une al cuarto principal y genera una mejor amplitud al habitarlos.</li>
+                    <li>👕 El cuarto útil (en planta) fue adecuado como zona de ropas independiente y unido al apartamento, para aumentar el área utilizable y hacer más amplia la cocina.</li>
+                    <li>📦 En la zona de ropas y en el vestier se aprovechó el espacio del "casetón" para ganar 60cms de altura que se usa como almacenamiento (como un segundo espacio de maletero para guardar elementos de casa).</li>
+                    <li>🔌 Adecuaciones para que el cableado de las conexiones de internet y TV vayan ocultas por la pared y evitar cables expuestos.</li>
+                </ul>
+            </div>
+
+            <!-- Características de la unidad residencial -->
+            <div class="description-section">
+                <h3>🏢 Características de la unidad residencial</h3>
+                <ul class="feature-list">
+                    <li>🛡️ Unidad cerrada con portería 24 horas, estrato 3</li>
+                    <li>🏊 Zona húmeda (piscinas, turco y sauna) y zona BBQ</li>
+                    <li>👶 Juegos infantiles, gimnasio al aire libre, canchas (fútbol y voleibol)</li>
+                    <li>🛗 2 ascensores por torre y shut de basuras</li>
+                    <li>🚗 Parqueaderos de carros y motos (privados y visitantes)</li>
+                    <li>📅 Antigüedad de la unidad: 6 años</li>
+                </ul>
+            </div>
+
+            <!-- Ubicación y sector -->
+            <div class="description-section">
+                <h3>📍 Ubicación y sector</h3>
+                <ul class="feature-list">
+                    <li>💊 Droguerías 24H, 3 supermercados (D1 y otros), gimnasio, salón de belleza y otros</li>
+                    <li>🏬 Dos centros comerciales a 10 min en carro o a 20 min en transporte público</li>
+                    <li>🚶 La portería está a 20 metros de una vía principal con acceso a múltiples rutas</li>
+                    <li>🚇 A 3 min en carro de la estación Madera o a 10 min caminando</li>
+                    <li>🏗️ Zona de amplia proyección de desarrollo urbano y valorización con proyectos inmobiliarios cercanos y la construcción del Central Park (Autódromo de Bello)</li>
+                    <li>🌳 Sendero del lago y zonas verdes para deporte en los alrededores del Central Park</li>
+                    <li>🚌 De fácil acceso a rutas de transporte público y cerca de vías principales: Autopista Norte, Autopista Medellín-Bogotá, Vía a Machado</li>
+                    <li>🏫 Amplia oferta de colegios y comercios para diferentes servicios</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -223,7 +416,7 @@
     <!-- Features de la Unidad Residencial -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Características de la Unidad</h2>
+            <h2 class="section-title">Características de la Unidad Residencial</h2>
             <div class="features-grid">
                 <div class="feature-item">
                     <i class="fas fa-swimming-pool"></i>
@@ -266,19 +459,19 @@
                     <span>2 Ascensores por Torre</span>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-motorcycle"></i>
-                    <span>Parqueadero de Motos</span>
+                    <i class="fas fa-car"></i>
+                    <span>Parqueaderos Privados y Visitantes</span>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-car-side"></i>
-                    <span>Parqueadero Visitantes</span>
+                    <i class="fas fa-motorcycle"></i>
+                    <span>Parqueadero de Motos</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Video del Inmueble -->
-    <section class="video">
+    <section class="video" id="video">
         <div class="container">
             <h2 class="section-title">Video del Inmueble</h2>
             <div class="video-container">
@@ -307,21 +500,7 @@
                     <i class="fas fa-user"></i>
                     <div>
                         <span class="label">Vendedor</span>
-                        <span class="value">David Link</span>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <span class="label">Teléfono</span>
-                        <span class="value">313 684 7081</span>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <span class="label">Email</span>
-                        <span class="value">edavid.link@gmail.com</span>
+                        <span class="value">David</span>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -336,8 +515,8 @@
                     <a href="https://wa.me/573136847081" class="btn-whatsapp-large" target="_blank" rel="noopener">
                         <i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp
                     </a>
-                    <a href="tel:573136847081" class="btn-call">
-                        <i class="fas fa-phone"></i> Llamar Ahora
+                    <a href="mailto:edavid.link@gmail.com?subject=Interesado%20en%20apartamento%20Toledo%20Campestre" class="btn-email" target="_blank" rel="noopener">
+                        <i class="fas fa-envelope"></i> Enviar Email
                     </a>
                 </div>
             </div>
@@ -347,11 +526,11 @@
     <!-- Footer simplificado -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Venta Apartamento - Toledo Campestre. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Apartamento Toledo. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Swiper JS (Carrusel) -->
+    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
