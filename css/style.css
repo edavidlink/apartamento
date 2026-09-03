@@ -263,7 +263,7 @@ body {
 }
 
 /* ========================================
-   GALLERY SECTION
+   GALLERY SECTION — CSS CAROUSEL
    ======================================== */
 .gallery {
     padding: var(--spacing-xl) 0;
@@ -289,23 +289,33 @@ body {
     border-radius: var(--radius-sm);
 }
 
-/* Swiper Carrusel */
-.mySwiper {
+/* Carrusel CSS puro */
+.css-carousel {
+    position: relative;
     width: 100%;
-    margin-bottom: var(--spacing-lg);
     border-radius: var(--radius-2xl);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     background: #000;
-    /* height set by JS to adapt to each slide's photo ratio */
 }
 
-.swiper-wrapper {
-    height: auto !important;
-    transition-duration: 0.3s !important;
+.carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.swiper-slide {
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
     position: relative;
     background: #000;
     display: flex;
@@ -314,9 +324,10 @@ body {
     overflow: hidden;
 }
 
-.swiper-slide img {
+.carousel-slide img {
     width: 100%;
-    height: 100% !important;
+    height: auto;
+    max-height: 85vh;
     object-fit: contain;
     display: block;
 }
@@ -334,47 +345,76 @@ body {
     text-align: center;
 }
 
-.swiper-pagination {
-    bottom: 20px !important;
+.watermark {
+    position: absolute;
+    bottom: 12px;
+    right: 20%;
+    background: rgba(0, 0, 0, 0.55);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 5;
+    font-family: 'Poppins', sans-serif;
 }
 
-.swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: var(--text-white) !important;
-    opacity: 0.5;
-    margin: 0 5px !important;
-}
-
-.swiper-pagination-bullet-active {
-    background: var(--text-white) !important;
-    opacity: 1 !important;
-    transform: scale(1.2);
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--text-white) !important;
+/* Flechas del carrusel */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     width: 50px;
     height: 50px;
-    background: rgba(0, 0, 0, 0.3);
+    border: none;
     border-radius: 50%;
-    padding: 0;
+    background: rgba(0, 0, 0, 0.35);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
+    transition: background 0.2s;
+    user-select: none;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    font-size: 20px;
-    font-weight: bold;
+.carousel-arrow:hover {
+    background: rgba(0, 0, 0, 0.6);
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    background: rgba(0, 0, 0, 0.5);
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+/* Paginación (puntos) */
+.carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.carousel-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+}
+
+.carousel-dots .dot.active {
+    background: white;
+    transform: scale(1.3);
 }
 
 /* Miniaturas */
@@ -392,6 +432,7 @@ body {
     align-items: center;
     gap: 4px;
     cursor: pointer;
+    pointer-events: auto;
 }
 
 .thumbnail {
@@ -863,8 +904,8 @@ body {
         font-size: 1.75rem;
     }
     
-    .mySwiper {
-        height: auto;
+    .css-carousel {
+        border-radius: var(--radius-lg);
     }
     
     .features-grid-apartment {
@@ -907,8 +948,8 @@ body {
         font-size: 1.5rem;
     }
     
-    .mySwiper {
-        height: auto;
+    .css-carousel {
+        border-radius: var(--radius-lg);
     }
     
     .thumbnails {
@@ -975,8 +1016,8 @@ body {
         font-size: 0.875rem;
     }
     
-    .mySwiper {
-        height: auto;
+    .css-carousel {
+        border-radius: var(--radius-lg);
     }
     
     .thumbnail {
@@ -1044,45 +1085,17 @@ body {
 }
 
 /* ========================================
-   IMAGE PROTECTION & WATERMARK
+   IMAGE PROTECTION
    ======================================== */
-.mySwiper,
-.thumbnails,
-.gallery img {
+.css-carousel,
+.carousel-track,
+.carousel-slide img {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-drag: none;
-}
-
-/* Restaurar interacción en flechas, paginación y miniaturas */
-.swiper-button-next,
-.swiper-button-prev,
-.swiper-pagination,
-.thumbnail-item {
-    pointer-events: auto !important;
-}
-
-.swiper-slide {
-    position: relative;
-}
-
-.watermark {
-    position: absolute;
-    bottom: 12px;
-    right: 20%;
-    background: rgba(0, 0, 0, 0.55);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    pointer-events: none;
-    z-index: 5;
-    font-family: 'Poppins', sans-serif;
 }
 
 /* ========================================

@@ -1,113 +1,168 @@
 /**
  * Landing Page Venta Apartamento
- * JavaScript principal
+ * JavaScript principal — CSS Carousel (sin dependencias)
  */
 
 // ========================================
-// INICIALIZACIÓN DEL CARRUSEL (SWIPER)
+// DATOS DE FOTOS
 // ========================================
+const photos = [
+    { src: 'images/foto-02.jpg', caption: 'Sala de cerca' },
+    { src: 'images/foto-01.jpg', caption: 'Sala principal' },
+    { src: 'images/foto-03.jpg', caption: 'Sala y cocina integrada' },
+    { src: 'images/foto-04.jpg', caption: 'Cocina integral en granito' },
+    { src: 'images/foto-05.jpg', caption: 'Cocina - vista cercana' },
+    { src: 'images/foto-06.jpg', caption: 'Comedor' },
+    { src: 'images/foto-07.jpg', caption: 'Comedor y sala' },
+    { src: 'images/foto-08.jpg', caption: 'Pasillo habitaciones' },
+    { src: 'images/foto-09.jpg', caption: 'Cuarto auxiliar con closet' },
+    { src: 'images/foto-10.jpg', caption: 'Baño auxiliar cabinado' },
+    { src: 'images/foto-11.jpg', caption: 'Estudio / posible 3er cuarto' },
+    { src: 'images/foto-12.jpg', caption: 'Habitación principal y estudio' },
+    { src: 'images/foto-13.jpg', caption: 'Habitación principal' },
+    { src: 'images/foto-14.jpg', caption: 'Vestier habitación principal' },
+    { src: 'images/foto-15.jpg', caption: 'Baño privado cabinado' },
+    { src: 'images/foto-16.jpg', caption: 'Ducha baño principal' },
+    { src: 'images/foto-17.jpg', caption: 'Balcón con vista al oriente' },
+    { src: 'images/foto-18.jpg', caption: 'Zona de ropas independiente' },
+    { src: 'images/foto-19.jpg', caption: 'Calentador de agua a gas' }
+];
 
-// Adaptar altura del swiper al slide actual (soporta fotos verticales)
-function adaptSlideHeight(swiper) {
-    const slides = swiper.slides;
-    const currentSlide = slides[swiper.activeIndex];
-    if (!currentSlide) return;
-    const img = currentSlide.querySelector('img');
-    if (!img) return;
+let currentSlide = 0;
+let autoplayTimer = null;
 
-    const containerWidth = swiper.el.offsetWidth;
-    const imgNaturalRatio = img.naturalHeight / img.naturalWidth;
-    let targetHeight = containerWidth * imgNaturalRatio;
+// ========================================
+// ELEMENTOS
+// ========================================
+const carousel = document.getElementById('cssCarousel');
+const track = carousel.querySelector('.carousel-track');
+const dotsContainer = carousel.querySelector('.carousel-dots');
+const thumbnailsContainer = document.getElementById('thumbnails');
+const prevBtn = carousel.querySelector('.carousel-prev');
+const nextBtn = carousel.querySelector('.carousel-next');
 
-    // Limitar altura máxima a 85vh
-    const maxH = window.innerHeight * 0.85;
-    if (targetHeight > maxH) targetHeight = maxH;
-    // Mínimo 250px
-    if (targetHeight < 250) targetHeight = 250;
+// ========================================
+// GENERAR MINIATURAS
+// ========================================
+photos.forEach((photo, i) => {
+    const item = document.createElement('div');
+    item.className = 'thumbnail-item' + (i === 0 ? ' active' : '');
+    item.dataset.index = i;
+    item.innerHTML = `
+        <img src="${photo.src}" alt="${photo.caption}" class="thumbnail" loading="lazy">
+        <span class="thumb-caption">${photo.caption}</span>
+    `;
+    item.addEventListener('click', () => goToSlide(i));
+    thumbnailsContainer.appendChild(item);
+});
 
-    // Forzar altura con !important para superar CSS de Swiper
-    swiper.el.style.setProperty('height', targetHeight + 'px', 'important');
-    swiper.wrapperEl.style.setProperty('height', targetHeight + 'px', 'important');
-    slides.forEach(s => {
-        s.style.setProperty('height', targetHeight + 'px', 'important');
+// ========================================
+// GENERAR PUNTOS DE PAGINACIÓN
+// ========================================
+photos.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Foto ${i + 1}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+});
+
+// ========================================
+// NAVEGACIÓN
+// ========================================
+function goToSlide(index) {
+    currentSlide = index;
+    const slide = track.children[index];
+    if (slide) {
+        slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    }
+    updateActiveStates();
+    resetAutoplay();
+}
+
+function nextSlide() {
+    goToSlide((currentSlide + 1) % photos.length);
+}
+
+function prevSlide() {
+    goToSlide((currentSlide - 1 + photos.length) % photos.length);
+}
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// ========================================
+// SINCRONIZAR CON SCROLL
+// ========================================
+function syncFromScroll() {
+    const scrollLeft = track.scrollLeft;
+    const slideWidth = track.offsetWidth;
+    const index = Math.round(scrollLeft / slideWidth);
+    if (index !== currentSlide && index >= 0 && index < photos.length) {
+        currentSlide = index;
+        updateActiveStates();
+    }
+}
+
+let scrollTimer;
+track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(syncFromScroll, 100);
+});
+
+// ========================================
+// ESTADOS ACTIVOS
+// ========================================
+function updateActiveStates() {
+    // Puntos
+    dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+    // Miniaturas
+    thumbnailsContainer.querySelectorAll('.thumbnail-item').forEach((item, i) => {
+        item.classList.toggle('active', i === currentSlide);
     });
 }
 
-const swiper = new Swiper('.mySwiper', {
-    // Configuración básica
-    slidesPerView: 1,
-    spaceBetween: 0,
-    loop: true,
-    
-    // Paginación (puntos)
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-    },
-    
-    // Navegación (flechas)
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    
-    // Autoplay
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-    },
-    
-    // Keyboard
-    keyboard: {
-        enabled: true,
-    },
-    
-    // Efecto de transición
-    effect: 'fade',
-    fadeEffect: {
-        crossFade: true
-    },
-    
-    // Eventos
-    on: {
-        slideChange: function() {
-            updateThumbnails(this.realIndex);
-            adaptSlideHeight(this);
-        },
-        init: function() {
-            adaptSlideHeight(this);
-        }
+// ========================================
+// AUTOPLAY
+// ========================================
+function startAutoplay() {
+    autoplayTimer = setInterval(nextSlide, 5000);
+}
+
+function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    startAutoplay();
+}
+
+carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+carousel.addEventListener('mouseleave', startAutoplay);
+
+// ========================================
+// TECLADO
+// ========================================
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevSlide();
+    else if (e.key === 'ArrowRight') nextSlide();
+});
+
+// ========================================
+// IMAGE PROTECTION (Anti-download)
+// ========================================
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG' || e.target.closest('.carousel-slide') || e.target.closest('.thumbnails')) {
+        e.preventDefault();
+        return false;
     }
 });
 
-// ========================================
-// MINIATURAS
-// ========================================
-const thumbnailItems = document.querySelectorAll('.thumbnail-item');
-
-function updateThumbnails(index) {
-    thumbnailItems.forEach((item, i) => {
-        if (i === index) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-}
-
-// Click en miniatura para ir al slide
-thumbnailItems.forEach((item, index) => {
-    item.addEventListener('click', () => {
-        swiper.slideToLoop(index);
-    });
+document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
 });
-
-// Marcar primera miniatura como activa
-if (thumbnailItems.length > 0) {
-    thumbnailItems[0].classList.add('active');
-}
 
 // ========================================
 // SCROLL REVEAL (Animaciones al scroll)
@@ -126,7 +181,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observar elementos para animación
 document.querySelectorAll('.metadata-item, .feature-item, .contact-item, .description-content').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -134,25 +188,17 @@ document.querySelectorAll('.metadata-item, .feature-item, .contact-item, .descri
     observer.observe(el);
 });
 
-// Estilo para elementos revelados
 const style = document.createElement('style');
-style.textContent = `
-    .revealed {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-`;
+style.textContent = `.revealed { opacity: 1 !important; transform: translateY(0) !important; }`;
 document.head.appendChild(style);
 
 // ========================================
 // HEADER DINÁMICO
 // ========================================
-let lastScroll = 0;
 const header = document.querySelector('.header');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
     if (currentScroll > 100) {
         header.style.background = 'rgba(255, 255, 255, 0.98)';
         header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
@@ -160,8 +206,6 @@ window.addEventListener('scroll', () => {
         header.style.background = 'rgba(255, 255, 255, 0.95)';
         header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
     }
-    
-    lastScroll = currentScroll;
 });
 
 // ========================================
@@ -172,127 +216,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
 
 // ========================================
-// LAZY LOADING DE IMÁGENES
+// INICIAR
 // ========================================
-if ('loading' in HTMLImageElement.prototype) {
-    // Soporta lazy loading nativo
-    console.log('Lazy loading nativo soportado');
-} else {
-    // Fallback para navegadores antiguos
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src || img.src;
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    lazyImages.forEach(img => imageObserver.observe(img));
-}
-
-// ========================================
-// PRELOAD DE IMÁGENES CRÍTICAS
-// ========================================
-window.addEventListener('load', () => {
-    // Preload primera imagen del carrusel
-    const firstSlide = document.querySelector('.swiper-slide:first-child img');
-    if (firstSlide) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = firstSlide.src;
-        document.head.appendChild(link);
-    }
-});
-
-// ========================================
-// MANEJO DE ERRORES DE IMÁGENES
-// ========================================
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function() {
-        this.style.display = 'none';
-        console.warn('Error cargando imagen:', this.src);
-    });
-});
-
-// ========================================
-// ACCESIBILIDAD
-// ========================================
-// Navegación por teclado en el carrusel
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-        swiper.slidePrev();
-    } else if (e.key === 'ArrowRight') {
-        swiper.slideNext();
-    }
-});
-
-// Pausar autoplay al hover
-const swiperContainer = document.querySelector('.swiper');
-if (swiperContainer) {
-    swiperContainer.addEventListener('mouseenter', () => {
-        swiper.autoplay.stop();
-    });
-    
-    swiperContainer.addEventListener('mouseleave', () => {
-        swiper.autoplay.start();
-    });
-}
-
-// Recalcular altura al cambiar tamaño de ventana
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => adaptSlideHeight(swiper), 150);
-});
-
-// Recalcular cuando las imágenes terminen de cargar
-document.querySelectorAll('.swiper-slide img').forEach(img => {
-    img.addEventListener('load', () => adaptSlideHeight(swiper));
-});
-
-// ========================================
-// LOGGING
-// ========================================
-console.log('Landing Page Apartamento Toledo - Inicializada');
-console.log('Total de slides:', document.querySelectorAll('.swiper-slide').length);
-console.log('Total de miniaturas:', thumbnailItems.length);
-
-// ========================================
-// IMAGE PROTECTION (Anti-download)
-// ========================================
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG' || e.target.closest('.swiper-slide') || e.target.closest('.thumbnails')) {
-        e.preventDefault();
-        return false;
-    }
-});
-
-document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// ========================================
-// WATERMARK - Marca de agua en cada slide
-// ========================================
-document.querySelectorAll('.swiper-slide').forEach(slide => {
-    const wm = document.createElement('div');
-    wm.className = 'watermark';
-    wm.textContent = 'PH: edavidlink';
-    slide.appendChild(wm);
-});
+startAutoplay();
+console.log('Landing Page Apartamento Toledo — CSS Carousel inicializado');
+console.log('Total de fotos:', photos.length);
