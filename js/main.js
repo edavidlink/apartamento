@@ -25,9 +25,12 @@ function adaptSlideHeight(swiper) {
     // Mínimo 250px
     if (targetHeight < 250) targetHeight = 250;
 
-    swiper.el.style.height = targetHeight + 'px';
-    swiper.wrapperEl.style.height = targetHeight + 'px';
-    slides.forEach(s => { s.style.height = targetHeight + 'px'; });
+    // Forzar altura con !important para superar CSS de Swiper
+    swiper.el.style.setProperty('height', targetHeight + 'px', 'important');
+    swiper.wrapperEl.style.setProperty('height', targetHeight + 'px', 'important');
+    slides.forEach(s => {
+        s.style.setProperty('height', targetHeight + 'px', 'important');
+    });
 }
 
 const swiper = new Swiper('.mySwiper', {
