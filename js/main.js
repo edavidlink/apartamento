@@ -6,6 +6,30 @@
 // ========================================
 // INICIALIZACIÓN DEL CARRUSEL (SWIPER)
 // ========================================
+
+// Adaptar altura del swiper al slide actual (soporta fotos verticales)
+function adaptSlideHeight(swiper) {
+    const slides = swiper.slides;
+    const currentSlide = slides[swiper.activeIndex];
+    if (!currentSlide) return;
+    const img = currentSlide.querySelector('img');
+    if (!img) return;
+
+    const containerWidth = swiper.el.offsetWidth;
+    const imgNaturalRatio = img.naturalHeight / img.naturalWidth;
+    let targetHeight = containerWidth * imgNaturalRatio;
+
+    // Limitar altura máxima a 85vh
+    const maxH = window.innerHeight * 0.85;
+    if (targetHeight > maxH) targetHeight = maxH;
+    // Mínimo 250px
+    if (targetHeight < 250) targetHeight = 250;
+
+    swiper.el.style.height = targetHeight + 'px';
+    swiper.wrapperEl.style.height = targetHeight + 'px';
+    slides.forEach(s => { s.style.height = targetHeight + 'px'; });
+}
+
 const swiper = new Swiper('.mySwiper', {
     // Configuración básica
     slidesPerView: 1,
@@ -47,6 +71,10 @@ const swiper = new Swiper('.mySwiper', {
     on: {
         slideChange: function() {
             updateThumbnails(this.realIndex);
+            adaptSlideHeight(this);
+        },
+        init: function() {
+            adaptSlideHeight(this);
         }
     }
 });
@@ -219,6 +247,18 @@ if (swiperContainer) {
         swiper.autoplay.start();
     });
 }
+
+// Recalcular altura al cambiar tamaño de ventana
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => adaptSlideHeight(swiper), 150);
+});
+
+// Recalcular cuando las imágenes terminen de cargar
+document.querySelectorAll('.swiper-slide img').forEach(img => {
+    img.addEventListener('load', () => adaptSlideHeight(swiper));
+});
 
 // ========================================
 // LOGGING
