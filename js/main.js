@@ -25,7 +25,8 @@ const photos = [
     { src: 'images/foto-16.jpg', caption: 'Ducha baño principal' },
     { src: 'images/foto-17.jpg', caption: 'Balcón con vista al oriente' },
     { src: 'images/foto-18.jpg', caption: 'Zona de ropas independiente' },
-    { src: 'images/foto-19.jpg', caption: 'Calentador de agua a gas' }
+    { src: 'images/foto-19.jpg', caption: 'Calentador de agua a gas' },
+    { src: 'images/foto-20.jpg', caption: 'Diseño - planos' }
 ];
 
 let currentSlide = 0;
