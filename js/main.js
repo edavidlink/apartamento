@@ -46,7 +46,9 @@ function initCarousel(containerId, thumbnailsId, photos) {
         currentSlide = index;
         const slide = track.children[index];
         if (slide) {
-            slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            // Scroll horizontal SOLO dentro del carrusel, sin mover la página
+            const slideLeft = slide.offsetLeft;
+            track.scrollTo({ left: slideLeft, behavior: 'smooth' });
         }
         updateActiveStates();
         resetAutoplay();
