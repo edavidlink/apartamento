@@ -1,7 +1,18 @@
 /*!
  * Analytics de trafico — 100% vanilla JS, autocontenido, SIN dependencias externas.
- * NO usa Google Analytics ni peticiones de red: todo se guarda en localStorage
- * del navegador que visita la pagina.
+ * NO usa Google Analytics ni librerias de terceros.
+ *
+ * Doble modo:
+ *   1) LOCAL  (siempre)     -> localStorage del navegador + panel Ctrl+Shift+A.
+ *   2) REMOTO (best-effort) -> fetch/sendBeacon a REMOTE_URL: backend Flask del
+ *      VPS (~/.hermes/scripts/analytics_server.py, SQLite compartida). Si el
+ *      backend no responde, se ignora en silencio: la pagina NUNCA se rompe.
+ *
+ * El endpoint remoto DEBE ser HTTPS: la landing vive en GitHub Pages (HTTPS) y
+ * el navegador bloquea peticiones http:// (mixed content). Por eso se usa un
+ * dominio nip.io con certificado Let's Encrypt via Caddy -> 127.0.0.1:5050.
+ *
+ * Desactivar el envio remoto:  localStorage.setItem('apt_remote_off','true')
  *
  * Datos guardados (claves en localStorage):
  *   apt_visitor_id        -> UUID del visitante (crypto.randomUUID)
@@ -118,6 +129,101 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* 0) backend remoto (server-side analytics)                           */
+  /* ------------------------------------------------------------------ */
+  /* Endpoint HTTPS del VPS. Si queda vacio ('') el modo remoto se apaga. */
+  var REMOTE_URL = 'https://apt-analytics.169.58.88.103.nip.io';
+  var REMOTE_TIMEOUT = 6000;   // ms
+  var remoteState = { ok: null, last: null, sent: 0, failed: 0, last_event: null };
+
+  function remoteOff() {
+    if (!REMOTE_URL) return true;
+    if (get('apt_remote_off', false) === true) return true;   // opt-out manual
+    return !(typeof window.fetch === 'function' ||
+             (navigator && typeof navigator.sendBeacon === 'function'));
+  }
+
+  function remotePayload(type, extra) {
+    var p = {
+      event_type: type,
+      visitor_id: VID,
+      page: (window.location.pathname || '/') + (window.location.search || ''),
+      element: null,
+      href: null,
+      duration_ms: null
+    };
+    if (extra) {
+      for (var k in extra) {
+        if (Object.prototype.hasOwnProperty.call(extra, k)) p[k] = extra[k];
+      }
+    }
+    return p;
+  }
+
+  // Envio silencioso: jamas lanza, jamas bloquea, jamas rompe la UX.
+  function remoteSend(type, extra) {
+    if (remoteOff()) return;
+    var body;
+    try {
+      body = JSON.stringify(remotePayload(type, extra));
+    } catch (e) { return; }
+
+    var isUnload = (type === 'duration');
+    remoteState.last_event = type;
+
+    // 1) sendBeacon: sobrevive al cierre/pestaña oculta (Content-Type text/plain
+    //    -> peticion CORS simple, sin preflight). El backend acepta text/plain.
+    if (isUnload && navigator && typeof navigator.sendBeacon === 'function') {
+      try {
+        var blob = new Blob([body], { type: 'text/plain;charset=UTF-8' });
+        if (navigator.sendBeacon(REMOTE_URL + '/event', blob)) {
+          remoteState.ok = true;
+          remoteState.last = Date.now();
+          remoteState.sent++;
+          return;
+        }
+      } catch (e) { /* cae a fetch */ }
+    }
+
+    // 2) fetch con timeout y keepalive
+    if (typeof window.fetch !== 'function') return;
+    try {
+      var ctrl = (typeof window.AbortController === 'function') ? new window.AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, REMOTE_TIMEOUT) : null;
+      var opts = {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        keepalive: isUnload,
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+      };
+      if (ctrl) opts.signal = ctrl.signal;
+
+      window.fetch(REMOTE_URL + '/event', opts).then(function (r) {
+        if (timer) clearTimeout(timer);
+        remoteState.ok = !!r.ok;
+        remoteState.last = Date.now();
+        if (r.ok) remoteState.sent++; else remoteState.failed++;
+      })['catch'](function () {
+        if (timer) clearTimeout(timer);
+        remoteState.ok = false;
+        remoteState.last = Date.now();
+        remoteState.failed++;
+      });
+    } catch (e) { /* silencioso */ }
+  }
+
+  function remoteLabel() {
+    if (remoteOff()) return 'remoto: desactivado';
+    if (remoteState.ok === null) return 'remoto: conectando…';
+    return remoteState.ok
+      ? 'remoto: ✅ ' + remoteState.sent + ' enviados'
+      : 'remoto: ⚠️ sin conexión (' + remoteState.failed + ')';
+  }
+
+  /* ------------------------------------------------------------------ */
   /* 1) identidad del visitante                                          */
   /* ------------------------------------------------------------------ */
   var K_VID = 'apt_visitor_id';
@@ -149,6 +255,8 @@
   set('apt_sessions', (typeof sessions === 'number' ? sessions : 0) + 1);
   set('apt_last_seen', new Date().toISOString());
 
+  remoteSend('pageview', { page: (window.location.pathname || '/') + (window.location.search || '') });
+
   /* ------------------------------------------------------------------ */
   /* 3) duracion de sesion                                               */
   /* ------------------------------------------------------------------ */
@@ -167,6 +275,7 @@
     var count = get(K_DUR_N, 0);
     set(K_DUR_T, (typeof total === 'number' ? total : 0) + t);
     set(K_DUR_N, (typeof count === 'number' ? count : 0) + 1);
+    remoteSend('duration', { duration_ms: Math.round(t) });
   }
 
   document.addEventListener('visibilitychange', function () {
@@ -209,6 +318,7 @@
 
     var ct = get('apt_clicks_total', 0);
     set('apt_clicks_total', (typeof ct === 'number' ? ct : 0) + 1);
+    remoteSend('click', { element: text, href: href || null });
   }
 
   document.addEventListener('click', function (ev) {
@@ -219,6 +329,42 @@
       if (tn === 'A' || tn === 'BUTTON') { trackClick(node); return; }
       node = node.parentNode;
     }
+  }, true);
+
+  /* ------------------------------------------------------------------ */
+  /* 4b) reproduccion de video (iframe YouTube)                          */
+  /* ------------------------------------------------------------------ */
+  /* El iframe se carga con ?enablejsapi=1, asi que YouTube envia eventos
+     por window.postMessage; informa 1 (playing) cuando arranca el video.
+     Ademas se cubre el click directo sobre el iframe (algunos navegadores
+     si lo propagan) para no perder la metrica. */
+  var lastVideoPing = 0;
+
+  function videoPing(origen) {
+    var t = Date.now();
+    if (t - lastVideoPing < 5000) return;   // anti-duplicados
+    lastVideoPing = t;
+    remoteSend('video_play', { element: 'Video YouTube', href: origen || '' });
+  }
+
+  window.addEventListener('message', function (ev) {
+    if (!ev || !ev.origin || ev.origin.indexOf('youtube') === -1) return;
+    var data = ev.data;
+    if (typeof data === 'string') {
+      try { data = JSON.parse(data); } catch (e) { return; }
+    }
+    if (!data || typeof data !== 'object') return;
+    if (data.event === 'onStateChange' && Number(data.info) === 1) videoPing('postMessage');
+    if (data.event === 'infoDelivery' && data.info &&
+        Number(data.info.playerState) === 1) videoPing('infoDelivery');
+  }, false);
+
+  document.addEventListener('click', function (ev) {
+    var n = ev.target;
+    if (!n || n.nodeType !== 1) return;
+    var ifr = (n.tagName === 'IFRAME') ? n : (n.closest ? n.closest('iframe') : null);
+    if (!ifr) return;
+    videoPing(ifr.getAttribute('src') || '');
   }, true);
 
   /* ------------------------------------------------------------------ */
@@ -411,7 +557,8 @@
         '<span class="stamp">' +
           'actualizado ' + new Date().toLocaleString('es-CO') +
           ' · días: ' + dias + ' (' + esc(rango) + ')<br>' +
-          'última visita: ' + esc(ultimo) +
+          'última visita: ' + esc(ultimo) + '<br>' +
+          esc(remoteLabel()) + ' · ' + esc(REMOTE_URL.replace(/^https?:\/\//, '')) +
         '</span>' +
       '</div>' +
       '<div class="scan">' + esc(VID) + '</div>';
@@ -486,6 +633,14 @@
       },
       visitas_por_dia: d.por_dia,
       top_clicks: d.top,
+      remoto: {
+        endpoint: REMOTE_URL,
+        estado: remoteOff() ? 'desactivado' : (remoteState.ok === null ? 'sin respuesta' : (remoteState.ok ? 'ok' : 'error')),
+        enviados: remoteState.sent,
+        fallidos: remoteState.failed,
+        ultimo_envio: remoteState.last ? new Date(remoteState.last).toISOString() : null,
+        nota: 'El backend guarda los eventos agregados del total de visitantes (SQLite en el VPS).'
+      },
       clicks_detalle: (function () {
         var c = get(K_CLICKS, {});
         var out = [];
@@ -532,6 +687,12 @@
     hide: close,
     toggle: toggle,
     data: collect,
-    export: exportJSON
+    export: exportJSON,
+    remote: {
+      endpoint: REMOTE_URL,
+      send: remoteSend,
+      state: function () { return remoteState; },
+      off: function (v) { set('apt_remote_off', v !== false); }
+    }
   };
 })();
