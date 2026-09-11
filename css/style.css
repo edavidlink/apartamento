@@ -163,6 +163,10 @@ body {
     background-color: var(--bg-light);
 }
 
+.share-btn i {
+    margin-right: 4px;
+}
+
 /* ========================================
    HERO SECTION (Compacto)
    ======================================== */

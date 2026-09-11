@@ -209,6 +209,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ========================================
+// SHARE BUTTON (Web Share API)
+// ========================================
+var shareBtn = document.getElementById('shareBtn');
+if (shareBtn) {
+    shareBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (navigator.share) {
+            navigator.share({
+                title: 'Apartamento Toledo Campestre - $305M',
+                text: 'Apartamento de 60m² en piso 21 con vista al oriente, en Bello. $305 millones. Dueño directo, sin comisión.',
+                url: window.location.href
+            })['catch'](function() {});
+        } else {
+            // Fallback: copiar link al portapapeles
+            var url = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(function() {
+                    shareBtn.innerHTML = '<i class="fas fa-check"></i> ¡Link copiado!';
+                    setTimeout(function() {
+                        shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Compartir';
+                    }, 2000);
+                });
+            } else {
+                // Fallback final
+                prompt('Copia este enlace:', url);
+            }
+        }
+    });
+}
+
+// ========================================
 // LOGGING
 // ========================================
 console.log('Landing Page Apartamento Toledo — CSS Carousel inicializado');
