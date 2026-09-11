@@ -171,6 +171,30 @@ body {
     font-size: 1.15rem;
 }
 
+@media (max-width: 768px) {
+    .nav {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0;
+    }
+    
+    .nav-link i {
+        font-size: 1.3rem;
+    }
+
+    .header .container {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .se-vende {
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+    }
+}
+
 /* ========================================
    HERO SECTION (Compacto)
    ======================================== */
