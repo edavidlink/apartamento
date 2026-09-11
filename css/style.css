@@ -262,6 +262,14 @@ body {
     font-size: 1.25rem;
 }
 
+.hero-cta {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.3px;
+}
+
 /* ========================================
    GALLERY SECTION — CSS CAROUSEL
    ======================================== */
