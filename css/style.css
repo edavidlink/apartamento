@@ -167,6 +167,10 @@ body {
     margin-right: 4px;
 }
 
+.nav-link i {
+    font-size: 1.15rem;
+}
+
 /* ========================================
    HERO SECTION (Compacto)
    ======================================== */

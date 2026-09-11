@@ -226,9 +226,9 @@ if (shareBtn) {
             var url = window.location.href;
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(url).then(function() {
-                    shareBtn.innerHTML = '<i class="fas fa-check"></i> ¡Link copiado!';
+                    shareBtn.innerHTML = '<i class="fas fa-check"></i>';
                     setTimeout(function() {
-                        shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Compartir';
+                        shareBtn.innerHTML = '<i class="fas fa-share-alt"></i>';
                     }, 2000);
                 });
             } else {
